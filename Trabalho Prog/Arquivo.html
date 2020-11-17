@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div classname= "container1">
+        <input id="namebox" placeholder="Digite seu nome">
+        <button id="insert">Enviar</button>
+    </div>
+ <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
+
+
+ 
+
+ <script id="MainScript">
+
+     // Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyAyIVyS8yJW7kmEMEtDlNeBxaBZm9VG3uk",
+    authDomain: "projectsd-2b36b.firebaseapp.com",
+    databaseURL: "https://projectsd-2b36b.firebaseio.com/",
+    projectId: "projectsd-2b36b",
+    storageBucket: "projectsd-2b36b.appspot.com",
+    messagingSenderId: "1001774246748",
+    appId: "1:1001774246748:web:0274d4470f81ec57fc2f99"
+  };
+
+  // Incializar firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // inserir dados
+
+    document.getElementById("insert").onclick = function(){
+        alert('enviado com sucesso!')
+        passaDados()
+
+        firebase.database().ref('estudantes/'+hora).set({
+            nome:nomePessoa,
+            //horario:hora,
+            dataAtual : dia
+
+        })
+    }
+
+    var nomePessoa
+    var data = new Date();
+    var dia     = data.getDate();           // 1-31
+    var dia_sem = data.getDay();            // 0-6 (zero=domingo)
+    var mes     = data.getMonth();          // 0-11 (zero=janeiro)
+    var ano2    = data.getYear();           // 2 dígitos
+    var ano4    = data.getFullYear();       // 4 dígitos
+    var hora    = data.getHours();          // 0-23
+    var min     = data.getMinutes();        // 0-59
+    var seg     = data.getSeconds();        // 0-59
+    var mseg    = data.getMilliseconds();   // 0-999
+    var tz      = data.getTimezoneOffset(); // em minutos
+
+     // Formata a data e a hora (note o mês + 1)
+    var str_data = dia + '/' + (mes+1) + '/' + ano4;
+    var str_hora = hora+':'+min+':'+seg
+    // hora + ':' + min + ':' + seg;
+    console.log(str_hora);
+
+    function passaDados(){
+        nomePessoa = document.getElementById('namebox').value
+        hora = str_hora;
+        dia = str_data;
+    }
+
+ </script>
+
+</body>
+</html>
