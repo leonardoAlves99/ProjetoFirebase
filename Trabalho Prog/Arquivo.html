@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Projeto SD</title>
 </head>
 <body>
     <div classname= "container1">
-        <input id="namebox" placeholder="Digite seu nome">
+        <input id="namebox" placeholder="digite aqui...">
         <button id="insert">Enviar</button>
     </div>
+
+<!--COMEÇA JAVASCRIPT-->
  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database-auth.js"></script>
  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
 
-
- 
-
  <script id="MainScript">
 
-     // Your web app's Firebase configuration
+// configuração comunicação com o firebase
 var firebaseConfig = {
     apiKey: "AIzaSyAyIVyS8yJW7kmEMEtDlNeBxaBZm9VG3uk",
     authDomain: "projectsd-2b36b.firebaseapp.com",
@@ -31,22 +30,32 @@ var firebaseConfig = {
   };
 
   // Incializar firebase
-  firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
+
+    // ----------------- pega dados do input --------------------------
+    function passaDados(){
+        nomePessoa = document.getElementById('namebox').value
+        hora = str_hora;
+        dia = str_data;
+    }
 
   // inserir dados
-
     document.getElementById("insert").onclick = function(){
         alert('enviado com sucesso!')
         passaDados()
 
-        firebase.database().ref('estudantes/'+nomePessoa).set({
+        let nomeRef = firebase.database().ref('estudantes/'+nomePessoa).set({
             nome:nomePessoa,
             horario:hora,
             dataAtual : dia
 
         })
     }
+    
+    let nomes = firebase.database().ref().child('estudantes').push().key;
 
+    let nomeRef = firebase.database().ref();
+    //-----------Dados Prontos -----.----------------------------------
     var nomePessoa
     var data = new Date();
     var dia     = data.getDate();           // 1-31
@@ -65,12 +74,6 @@ var firebaseConfig = {
     var str_hora = hora+':'+min+':'+seg
     // hora + ':' + min + ':' + seg;
     console.log(str_hora);
-
-    function passaDados(){
-        nomePessoa = document.getElementById('namebox').value
-        hora = str_hora;
-        dia = str_data;
-    }
 
  </script>
 
