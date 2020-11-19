@@ -39,9 +39,9 @@ var firebaseConfig = {
         alert('enviado com sucesso!')
         passaDados()
 
-        firebase.database().ref('estudantes/'+hora).set({
+        firebase.database().ref('estudantes/'+nomePessoa).set({
             nome:nomePessoa,
-            //horario:hora,
+            horario:hora,
             dataAtual : dia
 
         })
